@@ -1,0 +1,11 @@
+{
+	"toJSON": {
+		"getters": true,
+		"virtuals": true
+	},
+
+	"toObject": {
+		"getters": true,
+		"virtuals": true
+	}
+}

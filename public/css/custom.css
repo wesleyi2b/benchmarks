@@ -1,0 +1,162 @@
+body {
+	background: #ECF0F1;
+	font: 16px/1.231 "Lato", sans-serif;
+	padding-top: 52px;
+}
+
+.benchmark {
+	background: #ffffff;
+	margin-bottom: 20px;
+	padding: 20px;
+}
+
+.page-benchmarks .benchmarks .document {
+	display: none;
+}
+
+.benchmark h2 img {
+	margin-right: 10px;
+	margin-top: -15px;
+}
+
+.benchmark h2 {
+	font-size: 36px;
+	margin-bottom: 10px;
+}
+
+.tile {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.tile p {
+	font-size: 18px;
+	line-height: 24px;
+	margin: 0;
+}
+
+.tile p + p {
+	margin-bottom: 20px;
+}
+
+.page-benchmarks .benchmark-title,
+.page-benchmarks .benchmark-description {
+	background: white;
+	background: rgba(255,255,255,0.75);
+	display: block;
+}
+
+.page-benchmarks .benchmark-title {
+	padding-bottom: 20px;
+}
+
+.page-benchmarks .benchmark-title h2 {
+	margin: 0;
+}
+
+.page-benchmarks .benchmark-title h2 a {
+	color: #2C3E50;
+	text-decoration: none;
+}
+
+.page-benchmarks .benchmark-description {
+	margin-bottom: 20px;
+}
+
+.document h3 img { margin-right: 10px; }
+
+.page-benchmark .document img { float: left; margin-right: 20px; }
+
+.page-documents .document img { float: left; margin-right: 20px; }
+
+.hidden { display: none; visibility: hidden; }
+
+.page-header-wrapper {
+	background: #F1C40F;
+	margin-bottom: 20px;
+	padding: 50px;
+}
+
+.page-header-wrapper h1 {
+	color: #E67E22;
+}
+
+.page-documents .document {
+	margin-bottom: 20px;
+	padding: 20px;
+}
+
+.document-video, .page-document-video .page-header-wrapper { background: #E67E22; }
+
+.document-reading, .page-document-reading .page-header-wrapper  { background: #2ECC71; }
+
+.document-lesson, .page-document-lesson .page-header-wrapper  { background: #3498DB; }
+
+.document-specification, .page-document-specification .page-header-wrapper  { background: #9B59B6; }
+
+.document-assessment, .page-document-assessment .page-header-wrapper  { background: #E74C3C; }
+
+.document h3, .document h2, .page-document h1 { color: #ECF0F1;}
+.page-document h1 small { color: #BDC3C7; }
+.document h3 a, .document h2 a { color: #ECF0F1; font-weight: normal; }
+.page-document .page-header-wrapper img { float: left; margin: -20px 20px -20px 0; }
+
+.row-fluid, .row-fluid [class*='span'] { min-height: 1px; }
+
+.page-index .span4 p,
+.page-index .span4 img {
+	margin-bottom: 20px;
+}
+
+.page-index .span4 p:last-child {
+	margin-bottom: 0;
+}
+
+.page-index .span4 .tile {
+	background: #fff;
+	padding: 20px;
+}
+
+.page-index .span4 img {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.page-index .span4 h3,
+.page-index .span4 p {
+	text-align: center;
+}
+
+.page {
+	padding-bottom: 50px;
+}
+
+.page-help .tile {
+	background: white;
+}
+
+.page-help .tile p {
+	margin-bottom: 20px;
+}
+
+/*.page-benchmarks .documents {
+	padding: 20px;
+	margin: 0 -20px;
+}
+
+#benchmark-515b0a6ecf59a10000000001 .documents { background: white url('/images/benchmarks/constitution.jpg') repeat 50% 50%; }
+#benchmark-515afb9e4cea910000000001 .documents { background: white url('/images/benchmarks/nature1.jpg') repeat 50% 50%; }
+#benchmark-51645aea077a0d5f2b000001 .documents { background: white url('/images/benchmarks/nature2.jpg') repeat 50% 50%; }
+
+#benchmark-516d3cec8679809def43df3f .documents { background: white url('/images/benchmarks/constitution.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df39 .documents { background: white url('/images/benchmarks/nature1.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df3a .documents { background: white url('/images/benchmarks/nature2.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df3b .documents { background: white url('/images/benchmarks/nature3.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df3c .documents { background: white url('/images/benchmarks/nature4.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df3d .documents { background: white url('/images/benchmarks/nature5.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df3e .documents { background: white url('/images/benchmarks/nature6.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df40 .documents { background: white url('/images/benchmarks/nature7.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df41 .documents { background: white url('/images/benchmarks/nature8.jpg') repeat 50% 50%; }
+#benchmark-516d3cec8679809def43df42 .documents { background: white url('/images/benchmarks/nature9.jpg') repeat 50% 50%; }
+*/

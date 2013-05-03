@@ -1,0 +1,61 @@
+extends layout
+
+block content
+	div.page.page-help
+		div.page-header-wrapper
+			div.container
+				h1 Help
+		div.container
+			div.row
+				div.span12
+					div.tile
+						span.label.label-important IMPORTANT
+						h3 I can't access the OpenClass demo.
+						p To log in go to 
+							a(href='http://pearsonopenclass.com', target='_blank') OpenClass
+							| . The username/e-mail will be 
+							strong student@loufreyinstitute.org
+							|  and the password will be 
+							strong password
+							| .
+						p Once you're at the dashboard click on &quot;Teaching Middle School Civics&quot; under the courses menu. Once inside the course click on 
+							strong Benchmark SS7C35
+							|  on the menu and then on 
+							strong Assessment
+							| .
+					div.tile
+						h3 What is this site?
+						p This is a rapid prototype for the new Florida Joint Center for Citizenship homepage. We are attempting to streamline the way we distribute our content to teachers.
+					div.tile
+						h3 What's with all the funky text?
+						p We were told we only needed to demonstrate a single benchmark (SS.7.C.3.5) so the rest of them we used dummy content from two different pages. 
+							a(href='http://fillerati.com', target='_blank') Fillerati
+							|  uses random passages from famous books. 
+							a(href='http://hipsteripsum.me/', target='_blank') Hipster Ipsum
+							|  uses random buzzwords that would most likely be derived from the hipster community.
+					div.tile
+						h3 When will the site be officially released?
+						p We currently don't have a set-in-stone timeline. We are hoping to have the main content portion of the site ready for the '13-'14 school year.
+					div.tile
+						h3 Will I be required to log in?
+						p We are trying our best not to require logins for the resources. For those teachers that require professional development points it can't be avoided so we've outsourced our quiz system to 
+							a(href='http://openclass.com', target='_blank') Pearson OpenClass.
+							|  This means that you will only need to log in to OpenClass to take quizzes (if required by your district).
+						p In the future, we plan to implement logins using oAuth 2.0, which allows anyone to log in with their Google or Facebook account and will most likely be optional.
+					div.tile
+						h3 What about Moodle/Teaching Middle School Civics?
+						p It will most likely be deactivated once the new site launches. We will keep a back up of everything just in case. From a technological point of view Moodle is slow, bloated, and requires enormous resources. With the coming structural changes, it only makes sense to incorporate the resources from Moodle into our webpage and offset the PD points to another platform.
+					div.tile
+						h3 Where do I come in?
+						p This beta test is designed to gather input from teachers in order to better deliver our resources. We'd love if you filled out the feedback form located in the bottom right corner of your screen.
+					div.tile
+						h3 Can I use this on my iOS/Android device?
+						p Currently, no. When the official site launches it will be mobile compatible so you shouldn't have any issues viewing on a mobile device, so long as the device has been updated recently.
+					div.tile
+						h3 Browser requirements?
+						p Let's face it&mdash;most computers use Windows and by default come installed with Internet Explorer (IE). This has been a huge problem in the web design industry as IE never implements the 
+							a(href='http://www.w3.org/', target='_blank') W3C
+							|  standards properly and things can get ugly pretty quickly. The best thing you can do is 
+							a(href='http://browsehappy.com', target='_blank') update your browser
+							|  to the most recent version to ensure things are in working order.
+						p We understand that this is not always possible so we will try our best to be backwards compatible with older versions. We are currently aiming to support back to IE8 and above. If your school computers are still using IE8 or lower, it's time to have a chat with your computer's tech guy.

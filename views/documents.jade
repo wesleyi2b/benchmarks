@@ -1,0 +1,193 @@
+extends layout
+
+block content
+	div.page.page-documents
+		div.page-header-wrapper
+			div.container
+				h1 Documents
+					small.text-warning Beta
+		div.container
+			div.row
+				div.span8
+					div.documents
+						each document in documents
+							div(class='document document-#{document.type} tile clearfix')
+								if document.type == 'video'
+									img(src='/images/illustrations/colors.png', width='100', height='100')
+									h2 Content Video 
+										a(href='/documents/#{document._id}') #{document.title}
+								else if document.type == 'lesson'
+									img(src='/images/illustrations/mail.png', width='100', height='100')
+									h2 Lesson Plan 
+										a(href='/documents/#{document._id}') #{document.title}
+								else if document.type == 'reading'
+									img(src='/images/illustrations/book.png', width='100', height='100')
+									h2 Advanced Reading 
+										a(href='/documents/#{document._id}') #{document.title}
+								else if document.type == 'assessment'
+									img(src='/images/illustrations/time.png', width='100', height='100')
+									h2 Assessment Item 
+										a(href='/documents/#{document._id}') #{document.title}
+								else if document.type == 'specification'
+									img(src='/images/illustrations/clipboard.png', width='100', height='100')
+									h2 Benchmark Specification 
+										a(href='/documents/#{document._id}') #{document.title}
+								time.hidden #{document.updated}
+								p.moment.label.label-info.hidden Updated #{document.moment}
+				div.span4
+					div.todo.mrm
+						h4.todo-search Sort
+						ul#sort
+							li(data-sort='default')
+								div.todo-icon.fui-cross-24
+								div.todo-content
+									h4.todo-name: strong Document
+									| Alphabetically by title
+							li(data-sort='category')
+								div.todo-icon.fui-menu-24
+								div.todo-content
+									h4.todo-name: strong Reporting Category
+									| Coming Soon&hellip;
+							li(data-sort='updated')
+								div.todo-icon.fui-time-24
+								div.todo-content
+									h4.todo-name: strong Recently Updated
+									| Newest to oldest.
+					div.todo.mrm
+						h4.todo-search Show
+						ul#show
+							li.todo-done(data-show='default')
+								div.todo-icon.fui-cross-24
+								div.todo-content
+									h4.todo-name: strong Documents
+									| Display all types.
+							li(data-show='videos')
+								div.todo-icon.fui-eye-24
+								div.todo-content
+									h4.todo-name: strong Content Video
+									| Toggle videos.
+							li(data-show='readings')
+								div.todo-icon.fui-mail-24
+								div.todo-content
+									h4.todo-name: strong Advanced Readings
+									| Toggle readings.
+							li(data-show='specs')
+								div.todo-icon.fui-menu-24
+								div.todo-content
+									h4.todo-name: strong Specifications
+									| Toggle specifications.
+							li(data-show='lessons')
+								div.todo-icon.fui-new-24
+								div.todo-content
+									h4.todo-name: strong Lesson Plans
+									| Toggle lesson plans.
+							li(data-show='assessments')
+								div.todo-icon.fui-time-24
+								div.todo-content
+									h4.todo-name: strong Assessment Items
+									| Toggle assessments.
+
+block scripts
+	script
+		$(function () {
+			$('#sort').on('click', 'li', function (e) {
+				e.preventDefault();
+				var target = $(e.target);
+				if (target.prop('tagName') != 'li') {
+					target = target.closest('li');
+				}
+				var sort = target.data('sort');
+
+				var documents = $('.document');
+
+				if (sort == 'updated') {
+					var sorted = _.sortBy(documents, function (document) {
+						// the dash orders it by ascending
+						return -new Date($(document).find('time').text());
+					});
+
+					$('.document').fadeOut(150, function () {
+						$('.documents').empty();
+						_.each(sorted, function(document) {
+							$('.documents').append(document);
+							$('.document').fadeIn(150);
+						});
+						$('.moment').removeClass('hidden');
+					});
+
+					$('#sort li').removeClass('todo-done');
+					target.addClass('todo-done');
+
+				}
+
+				if (sort == 'default') {
+					var sorted = _.sortBy(documents, function (document) {
+						// the dash orders it by ascending
+						return $(document).find('h2').text();
+					});
+
+					$('.document').fadeOut(150, function () {
+						$('.documents').empty();
+						_.each(sorted, function(document) {
+							$('.documents').append(document);
+							$('.document').fadeIn(150);
+						});
+						$('.moment').addClass('hidden');
+					});
+
+					$('#sort li').removeClass('todo-done');
+					target.addClass('todo-done');
+
+				}
+			});
+
+			// -------------------------------------------
+
+			// slide options
+			var options = {duration: 150, easing: 'swing'};
+
+			// An array to pair our sort type to DOM class.
+			// Just makes our code less redundant.
+			var showTypes = { "videos": 'video', "readings": 'reading', "specs": 'specification', "lessons": 'lesson', "assessments": 'assessment' };
+
+			$('#show').on('click', 'li', function (e) {
+				// Stop link from refreshing page.
+				e.preventDefault();
+
+				var target = $(e.target);
+				if(target.prop('tagName') != 'li') {
+					target = target.closest('li');
+				}
+				var type = target.data('show');
+				var def = $('#show li[data-show=\'default\']');
+
+				// If default is selected and it isn't todo-done
+				if(type == 'default' && !def.hasClass('todo-done')) {
+					$('#show li').removeClass('todo-done');
+					target.addClass('todo-done');
+					$('.document').slideDown(options);
+				// something is selected while default is todo-done
+				} else if(type != 'default' && def.hasClass('todo-done')) {
+					def.removeClass('todo-done');
+					target.addClass('todo-done');
+					// hide all documents that aren't the selected type
+					$('.document').not('.document-'+showTypes[type]).slideUp(options);
+				// something is that is todo-done is selected again
+				} else if (type != 'default' && target.hasClass('todo-done')) {
+					target.removeClass('todo-done');
+					// check to make sure this will select no documents
+					// nothing is selected... reset to default
+					if (!$('#show li').hasClass('todo-done')) {
+						def.addClass('todo-done');
+						$('.document').slideDown(options);
+					} else {
+						// remove those documents
+						$('.document-'+showTypes[type]).slideUp(options);						
+					}
+				} else {
+					target.addClass('todo-done');
+					$('.document-'+showTypes[type]).slideDown(options);
+				}
+
+			});
+		});

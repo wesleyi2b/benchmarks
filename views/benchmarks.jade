@@ -1,0 +1,203 @@
+extends layout
+
+block content
+	div.page.page-benchmarks
+		div.page-header-wrapper
+			div.container
+				h1 Benchmarks
+					small.text-warning Beta
+				p This page lists every benchmark sortable alphabetically, by date, and eventually reporting category. Each document belonging to that benchmark is also linked from this page. Please view the benchmark on it's own page for a better viewing experience.
+		div.container
+			div.row
+				div.span8
+					div.benchmarks
+						each benchmark in benchmarks
+							div.benchmark.tile.clearfix(id='benchmark-#{benchmark._id}')
+								div.benchmark-title
+									a.btn.btn-large.btn-primary.pull-right(href='/benchmarks/#{benchmark._id}')
+										span.fui-checkround-24 
+										| View Benchmark
+									h2
+										//- img(src='/images/illustrations/clipboard.png', width='50', height='50')
+										a(href='/benchmarks/#{benchmark._id}') #{benchmark.benchmark}
+								time.date.hidden #{benchmark.updated}
+								p.moment.label.label-info.hidden Updated #{benchmark.moment}
+								div.benchmark-description
+									p #{benchmark.description}
+								div.row-fluid
+									div.span12
+										div.documents
+											each document in benchmark.documents
+												div(class='document document-#{document.type} tile')
+													h3
+														if document.type == 'video'
+															img(src='/images/illustrations/colors.png', width='50', height='50')
+															| Content Video 
+														else if document.type == 'lesson'
+															img(src='/images/illustrations/mail.png', width='50', height='50')
+															| Lesson Plan 
+														else if document.type == 'reading'
+															img(src='/images/illustrations/book.png', width='50', height='50')
+															| Advanced Reading 
+														else if document.type == 'assessment'
+															img(src='/images/illustrations/time.png', width='50', height='50')
+															| Assessment Item 
+														else if document.type == 'specification'
+															img(src='/images/illustrations/clipboard.png', width='50', height='50')
+															| Benchmark Specification 
+														a(href='/documents/#{document._id}') #{document.title}
+				div.span4
+					div.todo.mrm
+						h4.todo-search Sort by
+						ul#sort
+							li(data-sort='default')
+								div.todo-icon.fui-cross-24
+								div.todo-content
+									h4.todo-name: strong Benchmark
+									| Sort alphabetically.
+							li(data-sort='category')
+								div.todo-icon.fui-location-24
+								div.todo-content
+									h4.todo-name: strong Reporting Category
+									| Coming soon&hellip;
+							li(data-sort='updated')
+								div.todo-icon.fui-calendar-24
+								div.todo-content
+									h4.todo-name: strong Recently Updated
+									| Newest to oldest.
+					div.todo.mrm
+						h4.todo-search Show
+						ul#show
+							li.todo-done(data-show='default')
+								div.todo-icon.fui-cross-24
+								div.todo-content
+									h4.todo-name: strong Benchmark
+									| Show only benchmark.
+							li(data-show='videos')
+								div.todo-icon.fui-eye-24
+								div.todo-content
+									h4.todo-name: strong Content Video
+									| Toggle videos.
+							li(data-show='readings')
+								div.todo-icon.fui-menu-24
+								div.todo-content
+									h4.todo-name: strong Advanced Readings
+									| Toggle readings.
+							li(data-show='specs')
+								div.todo-icon.fui-checkround-24
+								div.todo-content
+									h4.todo-name: strong Specifications
+									| Toggle specifications.
+							li(data-show='lessons')
+								div.todo-icon.fui-new-24
+								div.todo-content
+									h4.todo-name: strong Lesson Plans
+									| Toggle lesson plans.
+							li(data-show='assessments')
+								div.todo-icon.fui-time-24
+								div.todo-content
+									h4.todo-name: strong Assessment Items
+									| Toggle assessments.
+
+block scripts
+	script
+		$(function () {
+			$('#sort').on('click', 'li', function (e) {
+				e.preventDefault();
+				var target = $(e.target);
+				if(target.prop('tagName') != 'li') {
+					target = target.closest('li');
+				}
+				var sort = target.data('sort');
+
+				var benchmarks = $('.benchmark');
+
+				if (sort == 'updated') {
+					var sorted = _.sortBy(benchmarks, function (benchmark) {
+						// the dash orders it by ascending
+						return -new Date($(benchmark).find('time').text());
+					});
+
+					$('.benchmark').fadeOut(150, function () {
+						$('.benchmarks').empty();
+						_.each(sorted, function(benchmark) {
+							$('.benchmarks').append(benchmark);
+							$('.benchmark').fadeIn(150);
+						});
+						$('.moment').removeClass('hidden');
+					});
+					
+					$('#sort li').removeClass('todo-done');
+					target.addClass('todo-done');
+
+				}
+
+				if (sort == 'default') {
+					var sorted = _.sortBy(benchmarks, function (benchmark) {
+						// the dash orders it by ascending
+						return $(benchmark).find('h2').text();
+					});
+
+					$('.benchmark').fadeOut(150, function () {
+						$('.benchmarks').empty();
+						_.each(sorted, function(benchmark) {
+							$('.benchmarks').append(benchmark);
+							$('.benchmark').fadeIn(150);
+						});
+						$('.moment').addClass('hidden');
+					});
+					
+					$('#sort li').removeClass('todo-done');
+					target.addClass('todo-done');
+				}
+			});
+
+			// -------------------------------------------
+
+			var options = {duration: 150, easing: 'swing'};
+
+			// An array to pair our sort type to DOM class.
+			// Just makes our code less redundant.
+			var showTypes = { "videos": 'video', "readings": 'reading', "specs": 'specification', "lessons": 'lesson', "assessments": 'assessment' };
+
+			$('#show').on('click', 'li', function (e) {
+				// Stop link from refreshing page.
+				e.preventDefault();
+
+				var target = $(e.target);
+				// Try not to loop through DOM every time we reference our target.
+				if(target.prop('tagName') != 'li') {
+					target = target.closest('li');
+				}
+				var type = target.data('show');
+
+				console.log(target);
+
+				if(type == 'default') {
+					$('#show li').removeClass('todo-done');
+					target.addClass('todo-done');
+					$('.document').slideUp(options);
+					return false;
+				} else {
+					$('#show li[data-show=\'default\']').removeClass('todo-done');
+				}
+
+				// Show visual identifier that target is selected and
+				// unselect it if clicked again.
+				if (target.hasClass('todo-done')) {
+					// Our target is todo-done so hide it.
+					target.removeClass('todo-done');
+					$('.document-'+showTypes[type]).slideUp(options);
+				} else {
+					// Our target is not todo-done so show it.
+					target.addClass('todo-done');
+					$('.document-'+showTypes[type]).slideDown(options);
+				}
+
+				if(!$('#show li').hasClass('todo-done')) {
+					$('#show li[data-show=\'default\']').addClass('todo-done');
+				}
+
+			});
+
+		});

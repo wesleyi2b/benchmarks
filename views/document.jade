@@ -1,0 +1,32 @@
+extends layout
+
+block content
+	div(class='page page-document page-document-#{document.type}')
+		div.page-header-wrapper
+			div.container
+				div.row
+					div.span12
+						if document.type == 'video'
+							img(src='/images/illustrations/colors.png', width='100', height='100')
+							h1 #{document.title} 
+								small Content Video
+						else if document.type == 'lesson'
+							img(src='/images/illustrations/mail.png', width='100', height='100')
+							h1 #{document.title} 
+								small Lesson Plan
+						else if document.type == 'reading'
+							img(src='/images/illustrations/book.png', width='100', height='100')
+							h1 #{document.title} 
+								small Advanced Reading
+						else if document.type == 'assessment'
+							img(src='/images/illustrations/time.png', width='100', height='100')
+							h1 #{document.title} 
+								small Assessment Item
+						else if document.type == 'specification'
+							img(src='/images/illustrations/clipboard.png', width='100', height='100')
+							h1 #{document.title} 
+								small Benchmark Specification
+		div.container
+			div.row
+				div.span12
+					!{document.content}

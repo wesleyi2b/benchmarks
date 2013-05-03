@@ -1,0 +1,30 @@
+extends layout
+
+block content
+	div.page.page-index
+		div.page-header-wrapper
+			div.container
+				h1 Welcome to the Florida Joint Center for Citizenship Beta site.
+		div.container
+			div.row
+				div.span4
+					div.tile
+						img(src='/images/illustrations/bag.png', width='100', height='100')
+						h3 What is it?
+						p You are looking at a rapidly developed web app prototype designed to demonstrate the direction we'd like to take our online presence and resource distribution.
+						p
+							a.btn.btn-large.btn-danger.btn-block(href='/benchmarks') Browse benchmarks
+				div.span4
+					div.tile
+						img(src='/images/illustrations/retina.png', width='100', height='100')
+						h3 How can I help?
+						p You should see a question mark at the bottom right corner of your screen. This is our feedback form and we'd love for you to fill it out as many times as you need.
+						p
+							a.btn.btn-large.btn-block.btn-primary(href='/help') More info
+				div.span4
+					div.tile
+						img(src='/images/illustrations/clipboard.png', width='100', height='100')
+						h3 Requirements
+						p Due to the limited timeline the site hasn't been tested properly on all platforms. For the best viewing experience we recommend using the latest Chrome or Firefox browser.
+						p
+							a.btn.btn-large.btn-block.btn-primary(href='http://browsehappy.com/', target="_blank") Update my browser
